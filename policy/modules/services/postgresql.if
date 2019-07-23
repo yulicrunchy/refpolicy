@@ -56,7 +56,7 @@ interface(`postgresql_role',`
 
 	tunable_policy(`sepgsql_enable_users_ddl',`
 		allow $2 user_sepgsql_schema_t:db_schema { create drop setattr };
-		allow $2 user_sepgsql_table_t:db_table { create drop setattr };
+		allow $2 user_sepgsql_table_t:db_table { create drop setattr truncate };
 		allow $2 user_sepgsql_table_t:db_column { create drop setattr };
 		allow $2 user_sepgsql_sysobj_t:db_tuple { update insert delete };
 		allow $2 user_sepgsql_seq_t:db_sequence { create drop setattr set_value };

@@ -253,7 +253,7 @@ allow postgresql_t {sepgsql_schema_type sepgsql_temp_object_t}:db_schema { creat
 type_transition postgresql_t sepgsql_database_type:db_schema sepgsql_schema_t;
 type_transition postgresql_t sepgsql_database_type:db_schema sepgsql_temp_object_t "pg_temp";
 
-allow postgresql_t sepgsql_table_type:db_table { create drop getattr setattr relabelfrom relabelto select update insert delete lock };
+allow postgresql_t sepgsql_table_type:db_table { create drop getattr setattr relabelfrom relabelto select update insert delete lock truncate };
 allow postgresql_t sepgsql_table_type:db_column { create drop getattr setattr relabelfrom relabelto select update insert };
 allow postgresql_t sepgsql_table_type:db_tuple { relabelfrom relabelto use select update insert delete };
 type_transition postgresql_t sepgsql_schema_type:db_table sepgsql_sysobj_t;
@@ -490,7 +490,7 @@ dontaudit { postgresql_t sepgsql_admin_type sepgsql_client_type sepgsql_unconfin
 
 # It is always allowed to operate temporary objects for any database client.
 allow sepgsql_client_type sepgsql_temp_object_t:db_schema { create drop getattr setattr search add_name remove_name };
-allow sepgsql_client_type sepgsql_temp_object_t:db_table { create drop getattr setattr select update insert delete lock };
+allow sepgsql_client_type sepgsql_temp_object_t:db_table { create drop getattr setattr select update insert delete lock truncate };
 allow sepgsql_client_type sepgsql_temp_object_t:db_column { create drop getattr setattr select update insert };
 allow sepgsql_client_type sepgsql_temp_object_t:db_tuple { use select update insert delete };
 allow sepgsql_client_type sepgsql_temp_object_t:db_sequence { create drop getattr setattr get_value next_value set_value };
@@ -515,7 +515,7 @@ allow sepgsql_admin_type sepgsql_schema_type:db_schema { create drop getattr set
 type_transition sepgsql_admin_type sepgsql_database_type:db_schema sepgsql_schema_t;
 type_transition sepgsql_admin_type sepgsql_database_type:db_schema sepgsql_temp_object_t "pg_temp";
 
-allow sepgsql_admin_type sepgsql_table_type:db_table { create drop getattr setattr relabelfrom relabelto lock };
+allow sepgsql_admin_type sepgsql_table_type:db_table { create drop getattr setattr relabelfrom relabelto lock truncate };
 allow sepgsql_admin_type sepgsql_table_type:db_column { create drop getattr setattr relabelfrom relabelto };
 allow sepgsql_admin_type sepgsql_sysobj_table_type:db_tuple { relabelfrom relabelto use select update insert delete };
 
@@ -535,7 +535,7 @@ allow sepgsql_admin_type sepgsql_proc_exec_t:db_procedure execute;
 type_transition sepgsql_admin_type sepgsql_schema_type:db_procedure sepgsql_proc_exec_t;
 
 allow sepgsql_admin_type sepgsql_temp_object_t:db_schema { create drop getattr setattr search add_name remove_name };
-allow sepgsql_admin_type sepgsql_temp_object_t:db_table { create drop getattr setattr select update insert delete lock };
+allow sepgsql_admin_type sepgsql_temp_object_t:db_table { create drop getattr setattr select update insert delete lock truncate };
 allow sepgsql_admin_type sepgsql_temp_object_t:db_column { create drop getattr setattr select update insert };
 allow sepgsql_admin_type sepgsql_temp_object_t:db_tuple { use select update insert delete };
 allow sepgsql_admin_type sepgsql_temp_object_t:db_sequence { create drop getattr setattr get_value next_value set_value };
@@ -559,7 +559,7 @@ tunable_policy(`sepgsql_unconfined_dbadm',`
 
 	allow sepgsql_admin_type sepgsql_schema_type:db_schema { create drop getattr setattr relabelfrom relabelto search add_name remove_name };
 
-	allow sepgsql_admin_type sepgsql_table_type:db_table { create drop getattr setattr relabelfrom relabelto select update insert delete lock };
+	allow sepgsql_admin_type sepgsql_table_type:db_table { create drop getattr setattr relabelfrom relabelto select update insert delete lock truncate };
 	allow sepgsql_admin_type sepgsql_table_type:db_column { create drop getattr setattr relabelfrom relabelto select update insert };
 	allow sepgsql_admin_type sepgsql_table_type:db_tuple { relabelfrom relabelto use select update insert delete };
 	allow sepgsql_admin_type sepgsql_sequence_type:db_sequence { create drop getattr setattr relabelfrom relabelto get_value next_value set_value };
@@ -592,7 +592,7 @@ type_transition sepgsql_unconfined_type sepgsql_schema_type:db_procedure sepgsql
 type_transition sepgsql_unconfined_type sepgsql_database_type:db_language sepgsql_lang_t;
 type_transition sepgsql_unconfined_type sepgsql_database_type:db_blob sepgsql_blob_t;
 
-allow sepgsql_unconfined_type sepgsql_table_type:db_table { create drop getattr setattr relabelfrom relabelto select update insert delete lock };
+allow sepgsql_unconfined_type sepgsql_table_type:db_table { create drop getattr setattr relabelfrom relabelto select update insert delete lock truncate };
 allow sepgsql_unconfined_type sepgsql_table_type:db_column { create drop getattr setattr relabelfrom relabelto select update insert };
 allow sepgsql_unconfined_type sepgsql_table_type:db_tuple { relabelfrom relabelto use select update insert delete };
 allow sepgsql_unconfined_type sepgsql_sequence_type:db_sequence { create drop getattr setattr relabelfrom relabelto get_value next_value set_value };

@@ -145,7 +145,7 @@ mlsconstrain db_database { drop getattr setattr relabelfrom access install_modul
 mlsconstrain db_schema { drop getattr setattr relabelfrom search }
 	( h1 dom h2 );
 
-mlsconstrain db_table { drop getattr setattr relabelfrom select update insert delete lock }
+mlsconstrain db_table { drop getattr setattr relabelfrom select update insert delete lock truncate }
 	( h1 dom h2 );
 
 mlsconstrain db_column { drop getattr setattr relabelfrom select update insert }

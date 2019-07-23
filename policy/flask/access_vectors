@@ -799,6 +799,7 @@ inherits database
 	insert
 	delete
 	lock
+	truncate
 }
 
 class db_procedure
